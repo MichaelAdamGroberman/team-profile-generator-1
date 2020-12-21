@@ -8,7 +8,8 @@
 // getEmail()
 // getRole() // Returns 'Employee'
 
-class Employee {
+module.exports = class Employee {
+
     constructor(name, id, email) {
         this.name = name;
         this.id = id;
