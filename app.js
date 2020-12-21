@@ -12,6 +12,77 @@ const render = require("./lib/htmlRenderer");
 
 
 // Write code to use inquirer to gather information about the development team members,
+const questions = {
+    Manager: [
+        {
+            type: "input",
+            name: "name",
+            message: "What is the manager's name?",
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What is the manager's id?",
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is the manager's email address?",
+        },
+        {
+            type: "input",
+            name: "officeNumber",
+            message: "What is the manager's office number?",
+        }
+    ],
+
+    Engineer: [
+        {
+            type: "input",
+            name: "name",
+            message: "What is the engineer's name?",
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What is the engineer's id?",
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is the engineer's email address?",
+        },
+        {
+            type: "input",
+            name: "github",
+            message: "What is the engineer's GitHub username?",
+        }
+    ],
+
+    Intern: [
+        {
+            type: "input",
+            name: "name",
+            message: "What is the intern's name?",
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What is the intern's id?",
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is the intern's email address?",
+        },
+        {
+            type: "input",
+            name: "school",
+            message: "What school is the intern attending?",
+        }
+    ]
+}
+
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 // After the user has input all employees desired, call the `render` function (required
