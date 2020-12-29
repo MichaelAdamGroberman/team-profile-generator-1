@@ -86,12 +86,12 @@ const questions = {
 }
 
 function init() {
-    let addNewNumbers = true;
+    // let addNewMembers = true;
 
-    addNewNumbers();
+    addNewMember();
 };
 
-function addNewNumbers() {
+function addNewMember() {
     inquirer.prompt(selectMemberType)
         .then(answer => {
             console.log(answer.memberType);
@@ -113,7 +113,25 @@ function addNewNumbers() {
                         team.push(manager);
 
                         //only 1 manager
-                    })
+                    });
+            } else if (answer.memberType === "Engineer") {
+                inquirer.prompt(questions.Engineer)
+                    .then(answer => {
+                        console.log(team);
+
+                        //save ee info
+                        const engineer = new Engineer(
+                            answer.name,
+                            answer.id,
+                            answer.email,
+                            answer.github
+                        );
+                        //add info to team array
+                        team.push(engineer);
+                        if (answer.addNew === "yes") {
+                            addNewMember();
+                        }
+                    });
             }
         })
 }
