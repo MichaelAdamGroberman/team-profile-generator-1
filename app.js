@@ -122,13 +122,11 @@ function init() {
 function addNewMember() {
     inquirer.prompt(selectMemberType)
         .then(answer => {
-            console.log(answer.memberType);
+            // console.log(answer.memberType);
 
             if (answer.memberType === "Manager") {
                 inquirer.prompt(questions.Manager)
                     .then(answer => {
-                        console.log(team);
-
                         //save employee info
                         const manager = new Manager(
                             answer.name,
@@ -143,13 +141,16 @@ function addNewMember() {
                             team.push(manager);
                             canAddManager = false;
                         };
+
+                        if (answer.addNew === "yes") {
+                            addNewMember();
+                        };
+
                     });
 
             } else if (answer.memberType === "Engineer") {
                 inquirer.prompt(questions.Engineer)
                     .then(answer => {
-                        console.log(team);
-
                         //save ee info
                         const engineer = new Engineer(
                             answer.name,
@@ -162,13 +163,12 @@ function addNewMember() {
                         if (answer.addNew === "yes") {
                             addNewMember();
                         };
+
                     });
 
             } else if (answer.memberType === "Intern") {
                 inquirer.prompt(questions.Intern)
                     .then(answer => {
-                        console.log(team);
-
                         //save ee info
                         const intern = new Intern(
                             answer.name,
@@ -181,6 +181,7 @@ function addNewMember() {
                         if (answer.addNew === "yes") {
                             addNewMember();
                         };
+
                     });
             };
         });
