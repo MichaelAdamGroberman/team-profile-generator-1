@@ -14,7 +14,7 @@ const Employee = require("./lib/Employee");
 let team = [];
 let canAddManager = true;
 
-// Write code to use inquirer to gather information about the development team members,
+// Write code to use inquirer to gather information about the development team members, and to create objects for each team member (using the correct classes as blueprints!)
 const questions = {
     Manager: [
         {
@@ -36,6 +36,12 @@ const questions = {
             type: "input",
             name: "officeNumber",
             message: "What is the manager's office number?",
+        },
+        {
+            type: "list",
+            name: "addNew",
+            message: "Do you want to add another employee",
+            choices: ["yes", "no"]
         }
     ],
 
@@ -59,6 +65,12 @@ const questions = {
             type: "input",
             name: "github",
             message: "What is the engineer's GitHub username?",
+        },
+        {
+            type: "list",
+            name: "addNew",
+            message: "Do you want to add another employee",
+            choices: ["yes", "no"]
         }
     ],
 
@@ -82,9 +94,24 @@ const questions = {
             type: "input",
             name: "school",
             message: "What school is the intern attending?",
+        },
+        {
+            type: "list",
+            name: "addNew",
+            message: "Do you want to add another employee",
+            choices: ["yes", "no"]
         }
     ]
-}
+};
+
+const selectMemberType = [
+    {
+        type: "list",
+        name: "memberType",
+        message: "Please choose the role for the employee",
+        choices: ["Manager", "Engineer", "Intern"]
+    }
+]
 
 function init() {
     // let addNewMembers = true;
@@ -150,7 +177,7 @@ function addNewMember() {
                             answer.school
                         );
                         //add info to team array
-                        team.push(engineer);
+                        team.push(intern);
                         if (answer.addNew === "yes") {
                             addNewMember();
                         };
@@ -161,13 +188,10 @@ function addNewMember() {
 
 init();
 
-// and to create objects for each team member (using the correct classes as blueprints!)
-// const manager = new Manager(promptUser, id, email, officeNumber);
-
-
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
+render(team);
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
