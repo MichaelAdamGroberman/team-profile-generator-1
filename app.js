@@ -9,7 +9,9 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/Employee");
 
+let team = [];
 
 // Write code to use inquirer to gather information about the development team members,
 const questions = {
@@ -83,7 +85,44 @@ const questions = {
     ]
 }
 
+function init() {
+    let addNewNumbers = true;
+
+    addNewNumbers();
+};
+
+function addNewNumbers() {
+    inquirer.prompt(selectMemberType)
+        .then(answer => {
+            console.log(answer.memberType);
+
+            if (answer.memberType === "Manager") {
+                inquirer.prompt(questions.Manager)
+                    .then(answer => {
+                        console.log(team);
+
+                        //save employee info
+                        const manager = new Manager(
+                            answer.name,
+                            answer.id,
+                            answer.email,
+                            answer.officeNumber
+                        );
+
+                        //add info to team array
+                        team.push(manager);
+
+                        //only 1 manager
+                    })
+            }
+        })
+}
+
+init();
+
 // and to create objects for each team member (using the correct classes as blueprints!)
+// const manager = new Manager(promptUser, id, email, officeNumber);
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
