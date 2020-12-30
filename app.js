@@ -23,7 +23,9 @@ const questions = {
             name: "name",
             message: "What is the manager's name?",
             validate: (value) => {
-                if (value) { return true } else { return "Please enter manager's name." }
+                if (value) {
+                    return true
+                } else { return "Please enter manager's name." }
             },
         },
         {
@@ -31,7 +33,9 @@ const questions = {
             name: "id",
             message: "What is the manager's id?",
             validate: (value) => {
-                if (value) { return true } else { return "Please enter manager's id." }
+                if (value) {
+                    return true
+                } else { return "Please enter manager's id." }
             },
         },
         {
@@ -49,7 +53,10 @@ const questions = {
             name: "officeNumber",
             message: "What is the manager's office number?",
             validate: (value) => {
-                if (value) { return true } else { return "Please enter manager's office number." }
+                console.log(value);
+                if (value) {
+                    return true
+                } else { return "Please enter manager's office number." }
             },
         },
         {
@@ -66,7 +73,9 @@ const questions = {
             name: "name",
             message: "What is the engineer's name?",
             validate: (value) => {
-                if (value) { return true } else { return "Please enter engineer's name." }
+                if (value) {
+                    return true
+                } else { return "Please enter engineer's name." }
             },
         },
         {
@@ -74,7 +83,9 @@ const questions = {
             name: "id",
             message: "What is the engineer's id?",
             validate: (value) => {
-                if (value) { return true } else { return "Please enter engineer's id." }
+                if (value) {
+                    return true
+                } else { return "Please enter engineer's id." }
             },
         },
         {
@@ -92,7 +103,9 @@ const questions = {
             name: "github",
             message: "What is the engineer's GitHub username?",
             validate: (value) => {
-                if (value) { return true } else { return "Please enter engineer's GitHub." }
+                if (value) {
+                    return true
+                } else { return "Please enter engineer's GitHub." }
             },
         },
         {
@@ -109,7 +122,9 @@ const questions = {
             name: "name",
             message: "What is the intern's name?",
             validate: (value) => {
-                if (value) { return true } else { return "Please enter intern's name." }
+                if (value) {
+                    return true
+                } else { return "Please enter intern's name." }
             },
         },
         {
@@ -117,7 +132,9 @@ const questions = {
             name: "id",
             message: "What is the intern's id?",
             validate: (value) => {
-                if (value) { return true } else { return "Please enter intern's id." }
+                if (value) {
+                    return true
+                } else { return "Please enter intern's id." }
             },
         },
         {
@@ -135,7 +152,9 @@ const questions = {
             name: "school",
             message: "What school is the intern attending?",
             validate: (value) => {
-                if (value) { return true } else { return "Please enter the name of school." }
+                if (value) {
+                    return true
+                } else { return "Please enter the name of school." }
             },
         },
         {
@@ -152,7 +171,7 @@ const selectMemberType = [
         type: "list",
         name: "memberType",
         message: "Please choose the role for the employee",
-        choices: ["Manager", "Engineer", "Intern"]
+        choices: ["Manager", "Engineer", "Intern"],
     }
 ];
 
@@ -162,30 +181,33 @@ function addNewMember() {
             // console.log(answer.memberType);
 
             if (answer.memberType === "Manager") {
-                inquirer.prompt(questions.Manager)
-                    .then(answer => {
-                        //save employee info
-                        const manager = new Manager
-                            (
-                                answer.name,
-                                answer.id,
-                                answer.email,
-                                answer.officeNumber
-                            );
+                if (canAddManager) {
+                    inquirer.prompt(questions.Manager)
+                        .then(answer => {
+                            //save employee info
+                            const manager = new Manager
+                                (
+                                    answer.name,
+                                    answer.id,
+                                    answer.email,
+                                    answer.officeNumber
+                                );
 
-                        //only 1 manager
-                        //add info to team array if manager doesn't exist
-                        if (canAddManager) {
+                            //add info to team array if manager doesn't exist
                             team.push(manager);
                             canAddManager = false;
-                        };
+                            if (answer.addNew === "yes") {
+                                addNewMember();
+                            } else {
+                                generate();
+                            }
+                        });
+                } else {
+                    //only 1 manager
+                    console.log("There is a manager already!")
+                    addNewMember();
+                }
 
-                        if (answer.addNew === "yes") {
-                            addNewMember();
-                        } else {
-                            generate();
-                        };
-                    });
 
             } else if (answer.memberType === "Engineer") {
                 inquirer.prompt(questions.Engineer)
