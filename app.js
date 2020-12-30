@@ -128,12 +128,13 @@ function addNewMember() {
                 inquirer.prompt(questions.Manager)
                     .then(answer => {
                         //save employee info
-                        const manager = new Manager(
-                            answer.name,
-                            answer.id,
-                            answer.email,
-                            answer.officeNumber
-                        );
+                        const manager = new Manager
+                            (
+                                answer.name,
+                                answer.id,
+                                answer.email,
+                                answer.officeNumber
+                            );
 
                         //only 1 manager
                         //add info to team array if manager doesn't exist
@@ -144,6 +145,8 @@ function addNewMember() {
 
                         if (answer.addNew === "yes") {
                             addNewMember();
+                        } else {
+                            generate();
                         };
 
                     });
@@ -152,16 +155,19 @@ function addNewMember() {
                 inquirer.prompt(questions.Engineer)
                     .then(answer => {
                         //save ee info
-                        const engineer = new Engineer(
-                            answer.name,
-                            answer.id,
-                            answer.email,
-                            answer.github
-                        );
+                        const engineer = new Engineer
+                            (
+                                answer.name,
+                                answer.id,
+                                answer.email,
+                                answer.github
+                            );
                         //add info to team array
                         team.push(engineer);
                         if (answer.addNew === "yes") {
                             addNewMember();
+                        } else {
+                            generate();
                         };
 
                     });
@@ -170,16 +176,19 @@ function addNewMember() {
                 inquirer.prompt(questions.Intern)
                     .then(answer => {
                         //save ee info
-                        const intern = new Intern(
-                            answer.name,
-                            answer.id,
-                            answer.email,
-                            answer.school
-                        );
+                        const intern = new Intern
+                            (
+                                answer.name,
+                                answer.id,
+                                answer.email,
+                                answer.school
+                            );
                         //add info to team array
                         team.push(intern);
                         if (answer.addNew === "yes") {
                             addNewMember();
+                        } else {
+                            generate();
                         };
 
                     });
@@ -187,12 +196,17 @@ function addNewMember() {
         });
 };
 
+function generate() {
+    fs.writeFileSync(outputPath, render(team), "utf-8");
+    process.exit(0);
+}
+
 init();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
-render(team);
+
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
