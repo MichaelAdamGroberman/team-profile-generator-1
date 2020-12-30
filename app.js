@@ -53,7 +53,6 @@ const questions = {
             name: "officeNumber",
             message: "What is the manager's office number?",
             validate: (value) => {
-                console.log(value);
                 if (value) {
                     return true
                 } else { return "Please enter manager's office number." }
