@@ -2,7 +2,7 @@
 
 ![License Badge](https://img.shields.io/github/license/mmeii/10-team-profile-generator) ![Top Language](https://img.shields.io/github/languages/top/mmeii/10-team-profile-generator)
 
-A Node CLI that uses inquirer and takes in information about employees and generates an HTML webpage that displays summaries for each person.
+A Node command-line application that uses inquirer and takes in information about employees and generates an HTML webpage that displays summaries for each person.
 
 ## Installation
 
@@ -33,7 +33,7 @@ A Node CLI that uses inquirer and takes in information about employees and gener
   
 * Then a team.html page will be generated in the output directory, that displays a nicely formatted team roster.
   
-* This is a sample [Team Sample](Assets/team-sample.png) file for a project generated using this application
+* This is a sample [Team](Assets/team-sample.png) page for a project generated using this application
   
   ![Sample Our Team Image](Assets/team-sample.png)
   
